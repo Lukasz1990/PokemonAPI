@@ -87,7 +87,7 @@ const BottomContainer = styled.div`
 const Buttons = styled.span`
   background: #f9e01d;
   width: 150px;
-  height: 30px;
+  padding: 10px;
   font-size: 16x;
   font-weight: 800;
   font-style: italic;
@@ -95,19 +95,41 @@ const Buttons = styled.span`
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
-  padding-top: 5px;
   margin-left: 20px;
   margin-right: 20px;
+  &:hover {
+    color: #f9e01d;
+    background: #1a5cb0;
+  }
+`;
+
+const BackButton = styled.span`
+  background: #f9e01d;
+  width: 200px;
+  height: 50px;
+  font-size: 16x;
+  font-weight: 800;
+  font-style: italic;
+  color: #1a5cb0;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px;
+  &:hover {
+    color: #f9e01d;
+    background: #1a5cb0;
+  }
 `;
 
 const Body = styled.tbody``;
 
-const PokemonDetails = ({ PokemonId }) => {
+const PokemonDetails = ({ PokemonId, onClose }) => {
   const [switchPokemon, setSwitchPokemon] = useState(PokemonId);
   const POKEMON_URL = `https://pokeapi.co/api/v2/pokemon/${switchPokemon}`;
   const [fetchedPokemon, setFetchedPokemon] = useState("");
   const [stats, setStats] = useState("");
   const filteredStats = stats.slice(1);
+  console.log(fetchedPokemon);
   useEffect(() => {
     async function fetchPokemons() {
       const response = await axios(POKEMON_URL);
@@ -145,6 +167,8 @@ const PokemonDetails = ({ PokemonId }) => {
   return (
     <Wrapper>
       <Container>
+        <BackButton onClick={onClose}>Powrót</BackButton>
+
         <Box>
           <Img>
             <img src="../images/pokemon.png"></img>
@@ -187,7 +211,7 @@ const PokemonDetails = ({ PokemonId }) => {
             )}
             <BottomContainer>
               <Buttons onClick={() => setSwitchPokemon(switchPokemon - 1)}>
-                Powrót
+                Poprzedni
               </Buttons>
               <TitleContainer>
                 <Title>{fetchedPokemon.id}</Title>
@@ -199,6 +223,7 @@ const PokemonDetails = ({ PokemonId }) => {
               </Buttons>
             </BottomContainer>
           </ImgCol>
+          <Col></Col>
         </Content>
       </Container>
     </Wrapper>

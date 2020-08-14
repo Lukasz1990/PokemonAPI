@@ -85,11 +85,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
   },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  modal: {},
   paper: {
     alignItems: "center",
     justifyContent: "center",
@@ -200,6 +196,7 @@ const Table = ({ filteredPokemons, pokemons }) => {
             Pokemon={Pokemon}
             pokemons={pokemons}
             filteredPokemons={filteredPokemons}
+            onClose={handleModal}
           />
         </div>
       </Modal>
